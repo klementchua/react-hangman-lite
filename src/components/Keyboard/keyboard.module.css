@@ -1,0 +1,24 @@
+.container {
+  align-self: stretch;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+  gap: 10px;
+}
+
+.container > button {
+  aspect-ratio: 1;
+  text-transform: uppercase;
+  font-size: 1.3rem;
+  border: 2px solid black;
+  cursor: pointer;
+}
+
+.container > button:disabled {
+  border: 2px solid rgb(0, 0, 0, 0.3);
+}
+
+.correct {
+  background-color: lightskyblue;
+  border: 2px solid rgb(0, 162, 255);
+  color: rgb(7, 94, 156);
+}

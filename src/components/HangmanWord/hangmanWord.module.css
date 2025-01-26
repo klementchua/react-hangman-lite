@@ -1,0 +1,31 @@
+.container {
+  font-family: monospace;
+  font-size: 2rem;
+  text-transform: uppercase;
+  display: flex;
+  gap: 10px;
+}
+
+.characterContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.character {
+  width: 20px;
+  height: 5px;
+  background-color: black;
+}
+
+.hideChar {
+  visibility: hidden;
+}
+.showChar {
+  visibility: visible;
+}
+
+.lostGame {
+  visibility: visible;
+  color: red;
+}
