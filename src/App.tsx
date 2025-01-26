@@ -12,25 +12,24 @@ function App() {
   const [word, setWord] = useState(getWord());
   const [guessedLetters, setGuessedLetters] = useState<string[]>([]);
 
-  const addGuessedLetter = useCallback(
-    (letter: string): void => {
-      if (guessedLetters.includes(letter)) return;
-      setGuessedLetters([...guessedLetters, letter]);
-    },
-    [guessedLetters]
-  );
-
   const correctLetters = guessedLetters.filter((letter) =>
     word.includes(letter)
   );
   const incorrectLetters = guessedLetters.filter(
     (letter) => !word.includes(letter)
   );
-
   const gameWon =
     Array.from(new Set(word.split(''))).length === correctLetters.length;
   const gameLost = incorrectLetters.length >= 6;
   const gameOver = gameWon || gameLost;
+
+  const addGuessedLetter = useCallback(
+    (letter: string): void => {
+      if (guessedLetters.includes(letter) || gameWon || gameLost) return;
+      setGuessedLetters([...guessedLetters, letter]);
+    },
+    [guessedLetters, gameWon, gameLost]
+  );
 
   // Effect for attaching event listener for restarting game
   useEffect(() => {
@@ -59,7 +58,13 @@ function App() {
 
   return (
     <div id="gameContainer">
-      <h1>{gameWon ? 'You win! :D' : gameLost ? 'You lost. :(' : ''}</h1>
+      <h1>
+        {gameWon
+          ? 'You win! Hit enter to refresh.'
+          : gameLost
+          ? 'You lost... Hit enter to refresh.'
+          : ''}
+      </h1>
       <HangmanDrawing numWrong={incorrectLetters.length} />
       <HangmanWord
         gameLost={gameLost}
